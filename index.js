@@ -138,10 +138,10 @@ bot.onText(/\/start/, (msg) => {
 
       bot.on("message", async (msg) => {
         if (msg.text === "/start") {
-          bot.sendMessage(
-            chatId,
-            `Buyurtmangiz qabul qilindi. Umumiy narx ${price} so'm. Iltimos, boshqa buyurtma bermoqchi bo'lsangiz /start buyrug'ini bosing.`
-          );
+          // bot.sendMessage(
+          //   chatId,
+          //   `Buyurtmangiz qabul qilindi. Umumiy narx ${price} so'm. Iltimos, boshqa buyurtma bermoqchi bo'lsangiz /start buyrug'ini bosing.`
+          // );
           bot.removeListeners("message");
           bot.removeListeners("callback_query");
         }
@@ -158,7 +158,7 @@ bot.onText(/\/start/, (msg) => {
         console.error(err);
         bot.sendMessage(
           chatId,
-          "Buyurtmani qabul qilishda xatolik yuzaga keldi. Iltimos, qayta urinib ko'ring."
+          "Buyurtmani qabul qilish kutilmoqda..."
         );
       }
     });
