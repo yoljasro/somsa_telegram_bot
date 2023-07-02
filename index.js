@@ -158,7 +158,7 @@ bot.onText(/\/start/, (msg) => {
         console.error(err);
         bot.sendMessage(
           chatId,
-          "Buyurtmani qabul qilish kutilmoqda..."
+          `Buyurtmani qabul qilindi. Umumiy Narx ${price}`
         );
       }
     });
