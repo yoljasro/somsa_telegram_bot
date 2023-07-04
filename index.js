@@ -9,7 +9,7 @@ const AdminBroExpress = require("admin-bro-expressjs");
 const AdminBroMongoose = require("admin-bro-mongoose");
 
 // MongoDBga ulanish
-mongoose.connect("mongodb://localhost:27017/telegram_bot", {
+mongoose.connect("mongodb://127.0.01:27017/telegram_bot", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
