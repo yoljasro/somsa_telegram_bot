@@ -9,7 +9,7 @@ const AdminBroExpress = require("admin-bro-expressjs");
 const AdminBroMongoose = require("admin-bro-mongoose");
 
 // MongoDBga ulanish
-mongoose.connect("mongodb://127.0.0.1:27017/telegram_bot", {
+mongoose.connect("mongodb+srv://saidaliyevjasur450:DCZuL1NNARNFAGbd@somsabot.j7lu3cp.mongodb.net/", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -20,11 +20,11 @@ db.once("open", function () {
 });
 
 app.get("/", (req, res) => {
-  res.send("hello world. I'm JasurBek");
+  res.send("Assalomu alaykum! Somsa buyurtma botiga xush kelibsiz.");
 });
 
 app.listen(port, () => {
-  console.log(`Example app is listening on port https://localhost:${port}`);
+  console.log(`App localhost:${port} portida eshitishga tayyor.`);
 });
 
 // Foydalanuvchi ma'lumotlari uchun User skemasi
@@ -43,10 +43,10 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 // Telegram botni yaratish
-const token = "6053180396:AAGZIuR8m80yyY92hp_ThWde-n3PXe8Wb94";
+const token = "6053180396:AAGZIuR8m80yyY92hp_ThWde-n3PXe8Wb94"; //Telegram bot tokeningizni kiriting
 const bot = new TelegramBot(token, { polling: true });
 
-// Ro'yxatdan o'tish buttoni
+// Ro'yxatdan o'tish tugmasi
 const registerKeyboard = {
   keyboard: [[{ text: "Ro'yxatdan o'tish", request_contact: true }]],
   resize_keyboard: true,
@@ -138,10 +138,6 @@ bot.onText(/\/start/, (msg) => {
 
       bot.on("message", async (msg) => {
         if (msg.text === "/start") {
-          // bot.sendMessage(
-          //   chatId,
-          //   `Buyurtmangiz qabul qilindi. Umumiy narx ${price} so'm. Iltimos, boshqa buyurtma bermoqchi bo'lsangiz /start buyrug'ini bosing.`
-          // );
           bot.removeListeners("message");
           bot.removeListeners("callback_query");
         }
@@ -151,7 +147,7 @@ bot.onText(/\/start/, (msg) => {
         const savedUser = await user.save();
         bot.sendMessage(
           chatId,
-          `Buyurtmangiz qabul qilindi. Umumiy narx ${price} so'm. Iltimos, boshqa buyurtma bermoqchi bo'lsangiz /start buyrug'ini bosing.`
+          `Buyurtmangiz qabul qilindi. Umumiy narx ${price} so'm. Tez orada uni yetkazib  beramiz. Iltimos, boshqa buyurtma bermoqchi bo'lsangiz /start buyrug'ini bosing.`
         );
         console.log(savedUser);
       } catch (err) {
@@ -162,6 +158,52 @@ bot.onText(/\/start/, (msg) => {
         );
       }
     });
+  });
+});
+
+// Manzil kiritish
+bot.onText(/\/manzil/, (msg) => {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(
+    chatId,
+    "Manzilingizni kiritish uchun quyidagi tugmani bosing:",
+    {
+      reply_markup: {
+        keyboard: [[{ text: "Manzilni kiritish", request_location: true }]],
+        resize_keyboard: true,
+        one_time_keyboard: true,
+      },
+    }
+  );
+
+  bot.once("message", async (msg) => {
+    const address = msg.text;
+
+    // Manzil ma'lumotlarini foydalanuvchiga yuborish
+    bot.sendMessage(chatId, `Sizning kiritgan manzilingiz: ${address}`);
+  });
+});
+
+// Locatsiya olish
+bot.onText(/\/locatsiya/, (msg) => {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(
+    chatId,
+    "Hozirgi joyingizni aniqlash uchun geolokatsiyangizni yuboring:",
+    {
+      reply_markup: {
+        keyboard: [[{ text: "Locatsiyani yuborish", request_location: true }]],
+        resize_keyboard: true,
+        one_time_keyboard: true,
+      },
+    }
+  );
+
+  bot.once("location", async (msg) => {
+    const latitude = msg.location.latitude;
+    const longitude = msg.location.longitude;
   });
 });
 
@@ -189,13 +231,13 @@ const adminBro = new AdminBro({
 });
 
 const ADMIN = {
-  email: process.env.ADMIN_EMAIL || "saidaliyevjasur450@gmail.com",
-  password: process.env.ADMIN_PASSWORD || "worldhalal1221",
+  email: process.env.ADMIN_EMAIL || "1",
+  password: process.env.ADMIN_PASSWORD || "1",
 };
 
 const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
-  cookieName: process.env.ADMIN_COOKIE_NAME || "worldhalal",
-  cookiePassword: process.env.ADMIN_COOKIE_PASS || "worldhalal1221",
+  cookieName: process.env.ADMIN_COOKIE_NAME || "1",
+  cookiePassword: process.env.ADMIN_COOKIE_PASS || "1",
   authenticate: async (email, password) => {
     if (email === ADMIN.email && password === ADMIN.password) {
       return ADMIN;

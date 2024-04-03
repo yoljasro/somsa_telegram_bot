@@ -14,6 +14,7 @@
   "author": "Saidaliyev Jasur",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/translate": "^8.2.0",
     "admin-bro": "^4.0.1",
     "admin-bro-expressjs": "^2.1.1",
     "admin-bro-mongoose": "^0.5.2",
