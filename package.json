@@ -4,7 +4,7 @@
   "description": "this is telegram bot uzbegim somsalari",
   "main": "index.js",
   "scripts": {
-    "start": ""
+    "start": "node index.js"
   },
   "keywords": [
     "uzbegim",

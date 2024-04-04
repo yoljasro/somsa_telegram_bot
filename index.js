@@ -9,10 +9,12 @@ const AdminBroExpress = require("admin-bro-expressjs");
 const AdminBroMongoose = require("admin-bro-mongoose");
 
 // MongoDBga ulanish
-mongoose.connect("mongodb+srv://saidaliyevjasur450:DCZuL1NNARNFAGbd@somsabot.j7lu3cp.mongodb.net/", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect("mongodb+srv://saidaliyevjasur450:DCZuL1NNARNFAGbd@somsabot.j7lu3cp.mongodb.net/",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDBga ulanishda xatolik:"));
 db.once("open", function () {
@@ -42,7 +44,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// Telegram botni yaratish
+// Telegram botni yaratish  
 const token = "6053180396:AAGZIuR8m80yyY92hp_ThWde-n3PXe8Wb94"; //Telegram bot tokeningizni kiriting
 const bot = new TelegramBot(token, { polling: true });
 
@@ -87,8 +89,7 @@ bot.onText(/\/start/, (msg) => {
         resolve(msg.text);
       });
     });
-
-    // Qutilar va somsalarning narxlari
+    // fOOD PRICES
     const prices = {
       "go'shtli quti": 40000,
       "tovuqli quti": 35000,
@@ -134,13 +135,6 @@ bot.onText(/\/start/, (msg) => {
         order: order,
         quantity: quantity,
         price: price,
-      });
-
-      bot.on("message", async (msg) => {
-        if (msg.text === "/start") {
-          bot.removeListeners("message");
-          bot.removeListeners("callback_query");
-        }
       });
 
       try {
@@ -235,7 +229,7 @@ const ADMIN = {
   password: process.env.ADMIN_PASSWORD || "1",
 };
 
-const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+const router = AdminBroExpress.buildAuthenticatedR12qaouter(adminBro, {
   cookieName: process.env.ADMIN_COOKIE_NAME || "1",
   cookiePassword: process.env.ADMIN_COOKIE_PASS || "1",
   authenticate: async (email, password) => {
